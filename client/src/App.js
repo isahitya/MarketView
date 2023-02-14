@@ -3,16 +3,27 @@ import React, { useEffect, useState} from 'react'
 function App() {
 
   const [userList, setUserList] = useState([{}])
+  const [stock, setStock] = useState()
+  
+  // useEffect(() => {
+  //   fetch("/api").then(
+  //     response => response.json()
+  //   ).then(
+  //     data => {
+  //       setUserList(data)
+  //     }
+  //   )
+  // }, [])
 
   useEffect(() => {
-    fetch("/api").then(
+    fetch("/api/stock").then(
       response => response.json()
     ).then(
-      data => {
-        setUserList(data)
+      stockData => {
+        setStock(stockData)
       }
     )
-  }, [])
+  })
 
   return (
     <div>
@@ -20,6 +31,9 @@ function App() {
         userList.users.map((eachUser, i) => (
           <p>{eachUser}</p>
         ))
+      )}
+      {(typeof stock === 'undefined') ? (<p>Stock loading...</p>):(
+        <p>{JSON.stringify(stock)}</p>
       )}
     </div>
   )
