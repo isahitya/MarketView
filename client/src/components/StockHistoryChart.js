@@ -6,10 +6,12 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
+  Legend,
   ResponsiveContainer,
 } from "recharts";
 
 function filterResponseArray(responseArray) {
+  console.log(responseArray);
   const filteredData = responseArray.map((eachDay) => {
     return {
       price: isNaN(eachDay.high) ? undefined : eachDay.high,
@@ -20,9 +22,9 @@ function filterResponseArray(responseArray) {
 }
 
 function StockHistoryChart(params) {
-  //send request to API
   const symbol = params.symbol;
-  const [chartData, setChartData] = useState();
+
+  const [chartData, setChartData] = useState(undefined);
 
   useEffect(() => {
     fetch("/api/chart/" + symbol)
@@ -31,43 +33,32 @@ function StockHistoryChart(params) {
         const filteredData = filterResponseArray(responseArray);
         setChartData(filteredData);
       });
-  });
+  }, []);
 
-  const data = [
-    { name: "Jan", value: 400 },
-    { name: "Feb", value: 300 },
-    { name: "Mar", value: 200 },
-    { name: "Apr", value: 278 },
-    { name: "May", value: 189 },
-    { name: "Jun", value: 239 },
-    { name: "Jul", value: 349 },
-    { name: "Aug", value: 478 },
-    { name: "Sep", value: 398 },
-    { name: "Oct", value: 500 },
-    { name: "Nov", value: 289 },
-    { name: "Dec", value: 379 },
-  ];
-
-  return (
-    //show chart
-    <div>
-      <h1>{symbol}</h1>
-      <ResponsiveContainer width="100%" height={300}>
-        <AreaChart data={chartData}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="priceDate" />
-          <YAxis />
-          <Tooltip />
-          <Area
-            type="monotone"
-            dataKey="price"
-            stroke="#8884d8"
-            fill="#8884d8"
-          />
-        </AreaChart>
-      </ResponsiveContainer>
-    </div>
-  );
+  if (chartData !== undefined) {
+    return (
+      <div>
+        <h1>Stock Price:</h1>
+        <ResponsiveContainer width="100%" height={300}>
+          <AreaChart data={chartData}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="priceDate" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Area
+              type="monotone"
+              dataKey="price"
+              stroke="#649e4f"
+              fill="#91e075"
+            />
+          </AreaChart>
+        </ResponsiveContainer>
+      </div>
+    );
+  } else {
+    return <h1>Loading stock history chart...</h1>;
+  }
 }
 
 export default StockHistoryChart;

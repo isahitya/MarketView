@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from "react";
-import StockHistoryChart from "./components/StockHistoryChart";
-
+import TickerOverview from "./components/TickerOverview";
 function App() {
-  return (
-    <div>
-      <StockHistoryChart symbol="AAPL" />
-    </div>
-  );
+  return <TickerOverview symbol="AAPL" />;
 }
 
 export default App;
