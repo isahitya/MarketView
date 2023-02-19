@@ -30,15 +30,12 @@ function filterResponseArray(responseArray) {
 
 function RevenueChart(params) {
   const symbol = params.symbol;
+  const data = params.data;
   const [chartData, setChartData] = useState();
 
   useEffect(() => {
-    fetch("/api/financials/" + symbol)
-      .then((response) => response.json())
-      .then((responseArray) => {
-        const filteredData = filterResponseArray(responseArray);
-        setChartData(filteredData);
-      });
+    const filteredData = filterResponseArray(data);
+    setChartData(filteredData);
   }, []);
 
   return (

@@ -11,7 +11,6 @@ import {
 } from "recharts";
 
 function filterResponseArray(responseArray) {
-  console.log(responseArray);
   const filteredData = responseArray.map((eachDay) => {
     return {
       price: isNaN(eachDay.high) ? undefined : eachDay.high,
@@ -23,16 +22,13 @@ function filterResponseArray(responseArray) {
 
 function StockHistoryChart(params) {
   const symbol = params.symbol;
+  const apiData = params.data;
 
   const [chartData, setChartData] = useState(undefined);
 
   useEffect(() => {
-    fetch("/api/chart/" + symbol)
-      .then((response) => response.json())
-      .then((responseArray) => {
-        const filteredData = filterResponseArray(responseArray);
-        setChartData(filteredData);
-      });
+    const filteredData = filterResponseArray(apiData);
+    setChartData(filteredData);
   }, []);
 
   if (chartData !== undefined) {

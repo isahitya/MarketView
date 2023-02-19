@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { PureComponent } from "react";
-//TODO: Make sure EPS is correct
+
 import {
   BarChart,
   Bar,
@@ -18,8 +18,8 @@ function filterResponseArray(responseArray) {
   const filteredData = responseArray.results
     .map((element) => {
       return {
-        eps: element.financials.income_statement.diluted_earnings_per_share
-          .value,
+        cash: element.financials.balance_sheet.assets.value, //Total assets
+        debt: element.financials.balance_sheet.liabilities.value, //Total Liabilities
         year: element.fiscal_year,
       };
     })
@@ -27,7 +27,7 @@ function filterResponseArray(responseArray) {
   return filteredData;
 }
 
-function EPSChart(params) {
+function CashAndDebtChart(params) {
   const symbol = params.symbol;
   const data = params.data;
   const [chartData, setChartData] = useState();
@@ -39,7 +39,7 @@ function EPSChart(params) {
 
   return (
     <div>
-      <h1>Earning Per Share:</h1>
+      <h1>Cash and Debt:</h1>
       <ResponsiveContainer width="100%" height={300}>
         <BarChart data={chartData}>
           <CartesianGrid strokeDasharray="3 3" />
@@ -47,11 +47,12 @@ function EPSChart(params) {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="eps" fill="#8884d8" />
+          <Bar dataKey="cash" fill="#8884d8" />
+          <Bar dataKey="debt" fill="#8884d8" />
         </BarChart>
       </ResponsiveContainer>
     </div>
   );
 }
 
-export default EPSChart;
+export default CashAndDebtChart;
