@@ -2,7 +2,7 @@ import express from "express";
 const app = express();
 
 import { Client } from "@apperate/iexjs";
-const client = new Client({ api_token: "pk_451507ecb91b41b1a945850cff6f0b97" });
+const client = new Client({ api_token: "sk_e5123f6b82914cff947b483fd5d15dc6" });
 
 import { referenceClient } from "@polygon.io/client-js";
 const reference = referenceClient("icNNjhfIlZtn_29RnVPKJ4VkljK5O7iS"); // polygon
@@ -24,7 +24,7 @@ app.get("/api/financials/:symbol", async (req, res) => {
     timeframe: "annual",
     limit: 10,
     order: "desc",
-    sort: "filling_date",
+    // sort: "filling_date",
   });
   res.json(data);
 });

@@ -1,4 +1,3 @@
-//https://cloud.iexapis.com/stable/stock/market/batch?symbols=aapl,fb,msft,amzn,tsla,nvda,goog,meta,amd,jpm,unh&types=chart,quote,news&range=1y&last=100&token=sk_e5123f6b82914cff947b483fd5d15dc6
 {
     "AAPL": {
         "quote": {

@@ -1,0 +1,13 @@
+.watchlist-card {
+    display:flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
+.watchlist-card ul {
+    padding: 0px;
+}
+.watchlist-card li {
+    list-style-type: none;
+
+}
