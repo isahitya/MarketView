@@ -1,7 +1,7 @@
 .watchlist-card {
     display:flex;
     flex-direction: column;
-    margin: 20px;
+    margin: 10px;
 }
 
 .watchlist-card ul {
@@ -9,5 +9,15 @@
 }
 .watchlist-card li {
     list-style-type: none;
+
+}
+
+.dashboard {
+    -webkit-box-shadow: 4px 0px 40px -20px rgba(0,0,0,0.91);
+-moz-box-shadow: 4px 0px 40px -20px rgba(0,0,0,0.91);
+box-shadow: 4px 0px 40px -20px rgba(0,0,0,0.91);
+margin: 1em;
+padding: 2em;
+border-radius: 10px 10px 10px 10px;
 
 }

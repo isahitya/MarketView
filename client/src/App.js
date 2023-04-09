@@ -4,15 +4,20 @@ import WatchlistDashboard from "./components/WatchlistDashboard/WatchlistDashboa
 import NewsDashboard from "./components/NewsDashboard/NewsDashboard";
 import TickerOverview from "./components/TickerOverview";
 import UserContext from "./store/user-context";
+import "./App.css";
 
 function App() {
   return (
     <>
       <NavBar></NavBar>
       {/* <TickerOverview symbol="AAPL" />; */}
-      <div style={{ display: "flex", "flex-direction": "row" }}>
-        <WatchlistDashboard />
-        <NewsDashboard />
+      <div style={{ display: "flex", flexDirection: "row", paddingTop: "5em" }}>
+        <div className="dashboard" style={{ flex: 1, width: "30%" }}>
+          <WatchlistDashboard />
+        </div>
+        <div className="dashboard" style={{ flex: 1, width: "30%" }}>
+          <NewsDashboard />
+        </div>
       </div>
     </>
   );

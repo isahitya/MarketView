@@ -1,6 +1,9 @@
 import React, { useContext } from "react";
 import UserContext from "../../store/user-context";
 import WatchlistCard from "./WatchlistCard";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import { margin } from "@mui/system";
 
 export default function WatchlistDashboard() {
   const userCtx = useContext(UserContext);
@@ -8,10 +11,15 @@ export default function WatchlistDashboard() {
   console.log(userCtx.watchlists);
   return (
     <>
-      {userCtx.watchlists.length > 0 &&
-        userCtx.watchlists.map((each) => {
-          return <WatchlistCard list={each} />;
-        })}
+      <Typography variant="h4" gutterBottom>
+        Your watchlists
+      </Typography>
+      <Grid container justifyContent="center">
+        {userCtx.watchlists.length > 0 &&
+          userCtx.watchlists.map((each) => {
+            return <WatchlistCard key={each.name} list={each} />;
+          })}
+      </Grid>
     </>
   );
 }

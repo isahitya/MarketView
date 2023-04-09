@@ -1,5 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import styles from "./Navbar.module.css";
+import { TextField, Toolbar } from "@mui/material";
+import AppBar from "@mui/material/AppBar";
+import SearchIcon from "@mui/icons-material/Search";
+import { InputAdornment } from "@mui/material";
+import Autocomplete from "@mui/material/Autocomplete";
 
 export default function NavBar() {
   const [searchText, setSearchText] = useState("");
@@ -27,20 +32,57 @@ export default function NavBar() {
   };
 
   return (
-    <>
-      <input
-        type="text"
-        id="navbar-search-field"
-        value={searchText}
-        onChange={searchTextChangeHandler}
-      />
-      {searchText.length > 0 && searchResults.length > 0 && (
-        <ul className={styles["search-result-list"]}>
-          {searchResults.map((item) => {
-            return <li key={item}>{item}</li>;
-          })}
-        </ul>
-      )}
-    </>
+    <AppBar position="static">
+      <Toolbar fullWidth>
+        {/* <TextField
+          label="Search"
+          fullWidth={false}
+          variant="filled"
+          type="text"
+          id="navbar-search-field"
+          value={searchText}
+          onChange={searchTextChangeHandler}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon />
+              </InputAdornment>
+            ),
+            style: { color: "inherit" }, // to match text color with other AppBar items
+          }}
+        /> */}
+        <Autocomplete
+          freeSolo
+          //className={classes.textField}
+          disableClearable
+          options={searchResults}
+          onInputChange={searchTextChangeHandler}
+          renderInput={(params) => (
+            <TextField
+              style={{
+                width: "15em",
+                color: "grey",
+                backgroundColor: "white",
+              }}
+              {...params}
+              placeholder="Search"
+              variant="outlined"
+              InputProps={{
+                ...params.InputProps,
+                startAdornment: <SearchIcon />,
+                style: { color: "inherit" }, // to match text color with other AppBar items
+              }}
+            />
+          )}
+        />
+        {/* {searchText.length > 0 && searchResults.length > 0 && (
+          <ul className={styles["search-result-list"]}>
+            {searchResults.map((item) => {
+              return <li key={item}>{item}</li>;
+            })}
+          </ul>
+        )} */}
+      </Toolbar>
+    </AppBar>
   );
 }
