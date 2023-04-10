@@ -12,17 +12,21 @@ function TickerOverview(params) {
     useState(undefined);
 
   useEffect(() => {
-    fetch("/api/chart/" + symbol).then(async (response) => {
-      const responseArray = await response.json();
-      setStockPriceResponseData(responseArray);
-    });
+    fetch("https://market-view.onrender.com/api/chart/" + symbol).then(
+      async (response) => {
+        const responseArray = await response.json();
+        setStockPriceResponseData(responseArray);
+      }
+    );
   }, []);
 
   useEffect(() => {
-    fetch("/api/financials/" + symbol).then(async (response) => {
-      const responseArray = await response.json();
-      setFinancialsResponseData(responseArray);
-    });
+    fetch("https://market-view.onrender.com/api/financials/" + symbol).then(
+      async (response) => {
+        const responseArray = await response.json();
+        setFinancialsResponseData(responseArray);
+      }
+    );
   }, []);
 
   return (
