@@ -21,10 +21,12 @@ const financialDataString = fs.readFileSync(
 const financialData = JSON.parse(financialDataString);
 
 app.get("/api", (req, res) => {
+  res.set("Access-Control-Allow-Origin", "*");
   res.json({ users: ["User 1", "User 2"] });
 });
 
 app.get("/api/chart/:symbol", async (req, res) => {
+  res.set("Access-Control-Allow-Origin", "*");
   const symbol = req.params.symbol;
   //const data = await client.chart({ symbol: symbol, range: "1y" });
   const data = chartData[symbol].chart;
@@ -32,6 +34,7 @@ app.get("/api/chart/:symbol", async (req, res) => {
 });
 
 app.get("/api/financials/:symbol", async (req, res) => {
+  res.set("Access-Control-Allow-Origin", "*");
   const symbol = req.params.symbol;
   // const data = await reference.stockFinancials({
   //   ticker: symbol,
@@ -49,4 +52,6 @@ app.get("/api/financials/:symbol", async (req, res) => {
 //   console.log("Server started on port:" + port);
 // });
 
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || 5555, () => {
+  console.log(`Server listening at port ${process.env.PORT || 5555}`);
+});
