@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import styles from "./Navbar.module.css";
 import { TextField, Toolbar } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import SearchIcon from "@mui/icons-material/Search";
-import { InputAdornment } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import HomeIcon from "@mui/icons-material/Home";
 import Autocomplete from "@mui/material/Autocomplete";
 
 export default function NavBar() {
@@ -32,7 +32,10 @@ export default function NavBar() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar
+      position="fixed"
+      sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+    >
       <Toolbar fullWidth>
         {/* <TextField
           label="Search"
@@ -51,6 +54,9 @@ export default function NavBar() {
             style: { color: "inherit" }, // to match text color with other AppBar items
           }}
         /> */}
+        <IconButton edge="start" color="inherit" aria-label="home" href="/">
+          <HomeIcon />
+        </IconButton>
         <Autocomplete
           freeSolo
           //className={classes.textField}

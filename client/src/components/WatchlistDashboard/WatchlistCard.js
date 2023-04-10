@@ -10,6 +10,9 @@ import ListItemText from "@mui/material/ListItemText";
 export default function (props) {
   const list = props.list;
   console.log(list);
+  const selectHandler = () => {
+    props.onWatchlistSelect(list);
+  };
   return (
     // <div className={"watchlist-card"}>
     //   {list.name}
@@ -18,7 +21,7 @@ export default function (props) {
     //       list.symbols.map((item) => <li key={item}>{item}</li>)}
     //   </ul>
     // </div>
-    <Card>
+    <Card onClick={selectHandler}>
       <CardContent>
         <Typography variant="h5" component="h2" gutterBottom>
           {list.name}

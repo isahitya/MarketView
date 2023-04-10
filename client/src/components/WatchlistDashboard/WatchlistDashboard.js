@@ -5,7 +5,7 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { margin } from "@mui/system";
 
-export default function WatchlistDashboard() {
+export default function WatchlistDashboard(props) {
   const userCtx = useContext(UserContext);
   console.log(userCtx);
   console.log(userCtx.watchlists);
@@ -17,7 +17,13 @@ export default function WatchlistDashboard() {
       <Grid container justifyContent="center">
         {userCtx.watchlists.length > 0 &&
           userCtx.watchlists.map((each) => {
-            return <WatchlistCard key={each.name} list={each} />;
+            return (
+              <WatchlistCard
+                onWatchlistSelect={props.onWatchlistSelect}
+                key={each.name}
+                list={each}
+              />
+            );
           })}
       </Grid>
     </>
