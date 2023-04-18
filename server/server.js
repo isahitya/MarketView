@@ -2,11 +2,11 @@ import express from "express";
 import fs from "fs";
 const app = express();
 
-import { chart, Client } from "@apperate/iexjs";
-const client = new Client({ api_token: "sk_e5123f6b82914cff947b483fd5d15dc6" });
+// import { chart, Client } from "@apperate/iexjs";
+// const client = new Client({ api_token: "sk_e5123f6b82914cff947b483fd5d15dc6" });
 
-import { referenceClient } from "@polygon.io/client-js";
-const reference = referenceClient("icNNjhfIlZtn_29RnVPKJ4VkljK5O7iS"); // polygon
+// import { referenceClient } from "@polygon.io/client-js";
+// const reference = referenceClient("icNNjhfIlZtn_29RnVPKJ4VkljK5O7iS"); // polygon
 
 const chartDataString = fs.readFileSync(
   "./data/last_100d_chart_quote_news.json",
