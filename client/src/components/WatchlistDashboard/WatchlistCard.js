@@ -21,7 +21,11 @@ export default function (props) {
     //       list.symbols.map((item) => <li key={item}>{item}</li>)}
     //   </ul>
     // </div>
-    <Card onClick={selectHandler}>
+    <Card
+      onClick={selectHandler}
+      sx={{ width: "10em", cursor: "pointer" }}
+      className="watchlist-card"
+    >
       <CardContent>
         <Typography variant="h5" component="h2" gutterBottom>
           {list.name}

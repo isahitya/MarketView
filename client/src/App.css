@@ -1,14 +1,7 @@
 .watchlist-card {
-    display:flex;
-    flex-direction: column;
-    margin: 10px;
-}
-
-.watchlist-card ul {
-    padding: 0px;
-}
-.watchlist-card li {
-    list-style-type: none;
+    box-shadow: 5px 10px 12px rgba(0, 0, 0, 0.25) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    border-radius: 4px;
 
 }
 

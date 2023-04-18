@@ -19,7 +19,7 @@ function filterResponseArray(responseArray) {
     .map((element) => {
       return {
         eps: element.financials.income_statement.diluted_earnings_per_share
-          .value,
+          ?.value,
         year: element.fiscal_year,
       };
     })

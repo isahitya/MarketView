@@ -36,7 +36,7 @@ export default function NavBar() {
       position="fixed"
       sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
     >
-      <Toolbar fullWidth>
+      <Toolbar>
         {/* <TextField
           label="Search"
           fullWidth={false}
