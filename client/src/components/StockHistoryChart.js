@@ -29,7 +29,7 @@ function StockHistoryChart(params) {
   useEffect(() => {
     const filteredData = filterResponseArray(apiData);
     setChartData(filteredData);
-  }, []);
+  }, [apiData, symbol]);
 
   if (chartData !== undefined) {
     return (

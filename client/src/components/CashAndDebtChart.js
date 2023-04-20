@@ -35,7 +35,7 @@ function CashAndDebtChart(params) {
   useEffect(() => {
     const filteredData = filterResponseArray(data);
     setChartData(filteredData);
-  }, []);
+  }, [data, symbol]);
 
   return (
     <div>

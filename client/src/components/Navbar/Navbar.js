@@ -5,11 +5,9 @@ import SearchIcon from "@mui/icons-material/Search";
 import IconButton from "@mui/material/IconButton";
 import HomeIcon from "@mui/icons-material/Home";
 import Autocomplete from "@mui/material/Autocomplete";
+import InputAdornment from "@mui/material/InputAdornment";
 
-export default function NavBar() {
-  const [searchText, setSearchText] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-
+export default function NavBar(props) {
   const data = [
     "AAPL",
     "FB",
@@ -24,11 +22,8 @@ export default function NavBar() {
     "UNH",
   ];
 
-  const searchTextChangeHandler = (event) => {
-    const query = event.target.value.toUpperCase();
-    const results = data.filter((item) => item.toUpperCase().includes(query));
-    setSearchText(query);
-    setSearchResults(results);
+  const searchResultClickHandler = (event, value) => {
+    props.onSearchResultSelect(value);
   };
 
   return (
@@ -37,32 +32,21 @@ export default function NavBar() {
       sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
     >
       <Toolbar>
-        {/* <TextField
-          label="Search"
-          fullWidth={false}
-          variant="filled"
-          type="text"
-          id="navbar-search-field"
-          value={searchText}
-          onChange={searchTextChangeHandler}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon />
-              </InputAdornment>
-            ),
-            style: { color: "inherit" }, // to match text color with other AppBar items
-          }}
-        /> */}
-        <IconButton edge="start" color="inherit" aria-label="home" href="/">
+        <IconButton
+          edge="start"
+          color="inherit"
+          aria-label="home"
+          onClick={props.onHomeButtonClick}
+        >
           <HomeIcon />
         </IconButton>
         <Autocomplete
           freeSolo
           //className={classes.textField}
+
           disableClearable
-          options={searchResults}
-          onInputChange={searchTextChangeHandler}
+          options={data}
+          onChange={searchResultClickHandler}
           renderInput={(params) => (
             <TextField
               style={{
@@ -81,13 +65,6 @@ export default function NavBar() {
             />
           )}
         />
-        {/* {searchText.length > 0 && searchResults.length > 0 && (
-          <ul className={styles["search-result-list"]}>
-            {searchResults.map((item) => {
-              return <li key={item}>{item}</li>;
-            })}
-          </ul>
-        )} */}
       </Toolbar>
     </AppBar>
   );
