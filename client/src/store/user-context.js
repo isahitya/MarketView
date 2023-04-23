@@ -2,6 +2,19 @@ import React from "react";
 
 const UserContext = React.createContext({
   name: "Jignesh Singh Kumar Solanki",
+  allSymbols: [
+    "AAPL",
+    "FB",
+    "MSFT",
+    "AMZN",
+    "TSLA",
+    "NVDA",
+    "GOOG",
+    "META",
+    "AMD",
+    "JPM",
+    "UNH",
+  ],
   watchlists: [
     { name: "Big Tech", symbols: ["AAPL", "MSFT", "META", "AMZN"] },
     { name: "Radar", symbols: ["TSLA", "GOOG"] },
