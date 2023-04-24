@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { TextField, Toolbar } from "@mui/material";
+import { Button, TextField, Toolbar } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import SearchIcon from "@mui/icons-material/Search";
 import IconButton from "@mui/material/IconButton";
@@ -40,6 +40,9 @@ export default function NavBar(props) {
         >
           <HomeIcon />
         </IconButton>
+        <Button onClick={props.onAdvancedSearchButtonClick}>
+          Advanced Search
+        </Button>
         <Autocomplete
           freeSolo
           //className={classes.textField}

@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import StockHistoryChart from "./StockHistoryChart";
 import RevenueChart from "./RevenueChart";
 import EPSChart from "./EPSChart";
 import CashAndDebtChart from "./CashAndDebtChart";
 import Box from "@mui/material/Box";
+import { Button } from "@mui/material";
+import { MenuItem } from "@mui/material";
+import { Select } from "@mui/material";
+import UserContext from "../store/user-context";
 
 function formatBigNumber(marketCap) {
   if (marketCap >= 1000000000) {
@@ -18,6 +22,9 @@ function formatBigNumber(marketCap) {
 }
 
 function TickerOverview(props) {
+  const userCTX = useContext(UserContext);
+  const watchlists = userCTX.watchlists;
+
   const symbol = props.symbol;
   const [stockPriceResponseData, setStockPriceResponseData] =
     useState(undefined);
@@ -73,6 +80,7 @@ function TickerOverview(props) {
           </>
         )}
       </div>
+
       {stockPriceResponseData !== undefined ? (
         <StockHistoryChart symbol={symbol} data={stockPriceResponseData} />
       ) : (

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {
   Modal,
   TextField,
@@ -10,6 +10,7 @@ import {
 import Autocomplete from "@mui/material/Autocomplete";
 import CloseIcon from "@mui/icons-material/Close";
 import Chip from "@mui/material/Chip";
+import UserContext from "../../store/user-context";
 
 const ModalWrapper = styled("div")({
   display: "flex",
@@ -50,13 +51,30 @@ const StockChip = styled(Chip)(({ theme }) => ({
   margin: theme.spacing(0.5),
 }));
 
+const BorderedTextField = styled(TextField)({
+  borderRadius: 4,
+  outline: "1px solid rgba(0, 0, 0, 0.23)",
+});
+
+const BorderedDiv = styled("div")({
+  borderRadius: 4,
+  outline: "1px solid rgba(0, 0, 0, 0.23)",
+  display: "inline-flex",
+  flexWrap: "wrap",
+  alignItems: "center",
+  padding: "2px 4px",
+  width: "100%",
+});
+
 const CreateWatchlistModal = ({ open, handleClose, stockSymbols }) => {
+  const userCTX = useContext(UserContext);
   const [watchlistName, setWatchlistName] = useState("");
   const [selectedSymbols, setSelectedSymbols] = useState([]);
 
   const handleCreate = () => {
     // handle creating the watchlist with name and selected symbols
     console.log({ watchlistName, selectedSymbols });
+    userCTX.addToWatchlist(selectedSymbols, watchlistName);
     handleClose();
   };
 
@@ -86,27 +104,41 @@ const CreateWatchlistModal = ({ open, handleClose, stockSymbols }) => {
           <CloseButton onClick={handleModalClose}>
             <CloseIcon />
           </CloseButton>
-          <TextField
+          <BorderedTextField
+            style={{ marginTop: "2em" }}
             label="Watchlist Name"
             value={watchlistName}
             onChange={(event) => setWatchlistName(event.target.value)}
+            fullWidth
           />
           <Autocomplete
+            style={{ width: "10em" }}
             id="stock-search"
             options={stockSymbols}
             freeSolo
             disableClearable
             onChange={handleSymbolSelect}
             renderInput={(params) => (
-              <TextField
+              <BorderedTextField
                 {...params}
                 label="Add Stock"
                 margin="normal"
                 variant="outlined"
+                fullWidth
               />
             )}
+            renderTags={(value, getTagProps) =>
+              value.map((option, index) => (
+                <StockChip
+                  key={option}
+                  label={option}
+                  onDelete={handleSymbolDelete(option)}
+                  {...getTagProps({ index })}
+                />
+              ))
+            }
           />
-          <div>
+          <BorderedDiv>
             {selectedSymbols.map((symbol) => (
               <StockChip
                 key={symbol}
@@ -114,7 +146,7 @@ const CreateWatchlistModal = ({ open, handleClose, stockSymbols }) => {
                 onDelete={handleSymbolDelete(symbol)}
               />
             ))}
-          </div>
+          </BorderedDiv>
           <div>
             <Button variant="contained" color="primary" onClick={handleCreate}>
               Create

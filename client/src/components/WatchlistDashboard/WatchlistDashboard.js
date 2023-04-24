@@ -12,6 +12,12 @@ const styles = {
     marginBottom: "1rem",
     textShadow: "1px 1px #dcdcdc",
   },
+  watchlistContainer: {
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "flex-start",
+    gap: "1rem",
+  },
 };
 
 export default function WatchlistDashboard(props) {
@@ -36,7 +42,7 @@ export default function WatchlistDashboard(props) {
       <div
         style={{
           display: "flex",
-          alignItems: "row",
+          alignItems: "center",
           justifyContent: "space-between",
         }}
       >
@@ -45,20 +51,19 @@ export default function WatchlistDashboard(props) {
         </Typography>
         <Button onClick={createWatchlistHandler}>Create Watchlist</Button>
       </div>
-      <Grid container justifyContent="center" spacing={2} wrap="wrap">
+      <div style={styles.watchlistContainer}>
         {userCtx.watchlists.length > 0 &&
           userCtx.watchlists.map((each) => {
             return (
-              <Grid item xs={12} sm={6} md={4} key={each.name}>
-                <WatchlistCard
-                  onWatchlistSelect={props.onWatchlistSelect}
-                  key={each.name}
-                  list={each}
-                />
-              </Grid>
+              <WatchlistCard
+                onWatchlistSelect={props.onWatchlistSelect}
+                key={each.name}
+                list={each}
+                style={{ minWidth: "300px" }}
+              />
             );
           })}
-      </Grid>
+      </div>
     </>
   );
 }

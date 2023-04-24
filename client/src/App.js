@@ -6,6 +6,7 @@ import NewsDashboard from "./components/NewsDashboard/NewsDashboard";
 import LoginView from "./components/LoginView/LoginView";
 import TickerOverview from "./components/TickerOverview";
 import UserContext from "./store/user-context";
+import AdvancedSearch from "./components/AdvancedSearch/AdvancedSearch";
 import Box from "@mui/material/Box";
 import "./App.css";
 
@@ -36,12 +37,17 @@ function App() {
     setView("HOME");
   };
 
+  const advancedSearchButtonClickHandler = () => {
+    setView("ADVANCEDSEARCH");
+  };
+
   return (
     <Box>
       {view != "LOGIN" && (
         <NavBar
           onHomeButtonClick={homeButtonClickHandler}
           onSearchResultSelect={searchResultSelectHandler}
+          onAdvancedSearchButtonClick={advancedSearchButtonClickHandler}
         ></NavBar>
       )}
       {/* <TickerOverview symbol="AAPL" />; */}
@@ -54,6 +60,7 @@ function App() {
             style={{
               flex: 1,
               width: "30%",
+              height: "50%",
               border: "1px solid rgba(0, 0, 0, 0.1) !important",
             }}
           >
@@ -79,6 +86,11 @@ function App() {
           paddingTop="3em"
           paddingLeft="1em"
         />
+      )}
+      {view == "ADVANCEDSEARCH" && (
+        <div style={{ marginTop: "5em" }}>
+          <AdvancedSearch />
+        </div>
       )}
     </Box>
   );
