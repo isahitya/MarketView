@@ -9,9 +9,10 @@ import UserContext from "./store/user-context";
 import AdvancedSearch from "./components/AdvancedSearch/AdvancedSearch";
 import Box from "@mui/material/Box";
 import "./App.css";
+import SignUpPage from "./components/SignupView/SignupView";
 
 function App() {
-  const [view, setView] = useState("LOGIN");
+  const [view, setView] = useState("SIGNUP");
   const [selectedWatchlist, setSelectedWatchlist] = useState("");
   const [searchedSymbol, setSearchedSymbol] = useState("");
 
@@ -19,6 +20,10 @@ function App() {
     console.log("Changing view to watchlist");
     setSelectedWatchlist(watchlist);
     setView("WATCHLIST");
+  };
+
+  const signupClickHandler = () => {
+    setView("LOGIN");
   };
 
   const searchResultSelectHandler = (symbol) => {
@@ -41,9 +46,14 @@ function App() {
     setView("ADVANCEDSEARCH");
   };
 
+  const searchTableRowClickHandler = (symbol) => {
+    setSearchedSymbol(symbol);
+    setView("TICKERVIEW");
+  };
+
   return (
     <Box>
-      {view != "LOGIN" && (
+      {view != "LOGIN" && view != "SIGNUP" && (
         <NavBar
           onHomeButtonClick={homeButtonClickHandler}
           onSearchResultSelect={searchResultSelectHandler}
@@ -83,15 +93,27 @@ function App() {
       {view == "TICKERVIEW" && (
         <TickerOverview
           symbol={searchedSymbol}
-          paddingTop="3em"
+          paddingTop="4em"
           paddingLeft="1em"
         />
       )}
       {view == "ADVANCEDSEARCH" && (
-        <div style={{ marginTop: "5em" }}>
-          <AdvancedSearch />
+        <div style={{ marginTop: "5em", marginLeft: "1em" }}>
+          <AdvancedSearch
+            onSearchTableRowClicked={searchTableRowClickHandler}
+          />
         </div>
       )}
+      {view == "SIGNUP" && (
+        <SignUpPage onSignupButtonClick={signupClickHandler} />
+      )}
+      <div class="disclaimer">
+        <p>
+          Disclaimer: This website is for informational purposes only and does
+          not provide investment advice or recommendations. Given data is
+          outdated.
+        </p>
+      </div>
     </Box>
   );
 }

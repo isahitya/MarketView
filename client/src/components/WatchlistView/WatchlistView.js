@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ListItem from "@mui/material/ListItem";
 import Drawer from "@mui/material/Drawer";
 import Toolbar from "@mui/material/Toolbar";
 import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemButton from "@mui/material/ListItemButton";
 import TickerOverview from "../TickerOverview";
+import RiskProfile from "./RiskProfile";
+import calculateRiskProfile from "./RiskProfileCalculator";
 
 const drawerWidth = 240;
 
@@ -22,6 +23,18 @@ export default function WatchlistView(props) {
     console.log(e);
     setSelectedSymbol(e);
   };
+
+  // const riskProfile = {
+  //   averagePeRatio: 18.6,
+  //   averageBeta: 1.1,
+  //   averageSharpeRatio: 0.35,
+  // };
+
+  const [riskProfile, setRiskProfile] = useState(null);
+
+  useEffect(() => {
+    setRiskProfile(calculateRiskProfile(3));
+  }, []);
 
   return (
     <>
@@ -46,8 +59,8 @@ export default function WatchlistView(props) {
               </ListItemButton>
             </ListItem>
           </List>
-          <Divider />
-          <List>
+          <Divider marginBottom="10em" />
+          <List marginTop="10em">
             {watchlist.symbols.map((text, index) => (
               <ListItem
                 key={text}
@@ -63,6 +76,13 @@ export default function WatchlistView(props) {
         </Box>
       </Drawer>
       <Box style={{ marginLeft: "16em", marginTop: "5em" }}>
+        {riskProfile != null && (
+          <RiskProfile
+            riskProfile={riskProfile}
+            watchlistName={watchlist.name}
+          />
+        )}
+        <div style={{ border: "1px solid black", marginTop: "2em" }}></div>
         <TickerOverview key={selectedSymbol} symbol={selectedSymbol} />
       </Box>
     </>

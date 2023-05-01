@@ -13,6 +13,8 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
+import InfoButton from "./InfoButton/InfoButton";
+
 function filterResponseArray(responseArray) {
   console.log(responseArray);
   const filteredData = responseArray.results
@@ -27,6 +29,9 @@ function filterResponseArray(responseArray) {
   return filteredData;
 }
 
+const earningPerShareInfo =
+  "Earnings Per Share (EPS): Earnings per share (EPS) is the portion of a company's profit that is allocated to each outstanding share of common stock. EPS is calculated by dividing the company's net income by the total number of outstanding shares. Investors use EPS to evaluate a company's profitability on a per-share basis. Higher EPS is generally considered a positive sign, as it indicates that a company is generating more profit for its shareholders.";
+
 function EPSChart(params) {
   const symbol = params.symbol;
   const data = params.data;
@@ -39,7 +44,10 @@ function EPSChart(params) {
 
   return (
     <div>
-      <h1>Earning Per Share:</h1>
+      <div style={{ display: "flex", flexDirection: "row" }}>
+        <h1>Earning Per Share</h1>
+        <InfoButton text={earningPerShareInfo} />
+      </div>
       <ResponsiveContainer width="100%" height={300}>
         <BarChart data={chartData}>
           <CartesianGrid strokeDasharray="3 3" />
@@ -47,7 +55,7 @@ function EPSChart(params) {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="eps" fill="#8884d8" />
+          <Bar dataKey="eps" fill="#2cb9f5" />
         </BarChart>
       </ResponsiveContainer>
     </div>

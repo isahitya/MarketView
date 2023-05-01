@@ -16,6 +16,7 @@ const styles = {
     alignItems: "flex-start",
     margin: "1rem",
     width: "100%",
+    cursor: "pointer",
   },
   media: {
     height: "6em",
@@ -36,45 +37,49 @@ const styles = {
 const news = [
   {
     id: 1,
-    title: "Lorem ipsum dolor sit amet",
+    title:
+      "General Motors raises 2023 guidance as first-quarter earnings beat expectations",
     image: "https://picsum.photos/200/200?random=1",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pellentesque congue magna.",
+      "For the full year, GM is raising its adjusted earnings expectations to a range of $11 billion to $13 billion, or $6.35 to $7.35 a share, up from a previous range of $10.5 billion to $12.5 billion, or ...",
   },
   {
     id: 2,
-    title: "Praesent ac lacinia felis",
+    title:
+      "US home prices rose slightly in February, snapping seven months of declines",
     image: "https://picsum.photos/200/200?random=2",
     description:
-      "Praesent ac lacinia felis, vitae posuere elit. In viverra ante sit amet justo malesuada.",
+      "US home prices rose slightly in February, snapping a seven-month streak of month-over-month declines, according to the latest S&P CoreLogic Case-Shiller US National Home Price Index, released Tuesday...",
   },
   {
     id: 3,
-    title: "Fusce ultricies odio nec justo",
+    title: "US consumer confidence falls to 9-month low in April",
     image: "https://picsum.photos/200/200?random=3",
     description:
-      "Fusce ultricies odio nec justo ullamcorper, a maximus magna scelerisque. Donec sit amet aliquam sapien.",
+      "U.S. consumer confidence fell to a nine-month low in April led by a darkening outlook that augers a recession beginning in the near future, a survey showed on Tuesday...",
   },
   {
     id: 4,
-    title: "Fusce ultricies odio nec justo",
-    image: "https://picsum.photos/200/200?random=3",
+    title: "For Tech, Doing Better Might Not Look Good Enough",
+    image: "https://picsum.photos/200/200?random=4",
     description:
-      "Fusce ultricies odio nec justo ullamcorper, a maximus magna scelerisque. Donec sit amet aliquam sapien.",
+      "The first-quarter earnings season is well under way with roughly 20% of the S&P 500 companies having reported already. And the verdict is: So far, so good...",
   },
   {
     id: 5,
-    title: "Fusce ultricies odio nec justo",
-    image: "https://picsum.photos/200/200?random=3",
+    title:
+      "First Republic says deposits tumbled 40% to $104.5 billion in 1Q, but have stabilized since",
+    image: "https://picsum.photos/200/200?random=5",
     description:
-      "Fusce ultricies odio nec justo ullamcorper, a maximus magna scelerisque. Donec sit amet aliquam sapien.",
+      "Troubled regional bank First Republic said Monday that its deposits fell 40.8% to $104.5 billion in the first quarter, which saw the collapse of two other mid-sized banks and sparked fear from customers about widespread bank failures...",
   },
   {
     id: 6,
-    title: "Fusce ultricies odio nec justo",
-    image: "https://picsum.photos/200/200?random=3",
+    title:
+      "Roblox, Amazon, Microsoft lead companies with highest paid internships",
+    image: "https://picsum.photos/200/200?random=6",
     description:
-      "Fusce ultricies odio nec justo ullamcorper, a maximus magna scelerisque. Donec sit amet aliquam sapien.",
+      "Stripe topped Glassdoor's annual list of the 25 highest-paying internships with interns bringing home an average monthly salary of $9,064 based on a 40-hour work week, according to the report. That would equal over $100,000 per year...",
   },
 ];
 

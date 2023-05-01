@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import UserContext from "../../store/user-context";
 import WatchlistCard from "./WatchlistCard";
-import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { Button } from "@mui/material";
 import CreateWatchListModal from "../CreateWatchListModal/CreateWatchListModal";

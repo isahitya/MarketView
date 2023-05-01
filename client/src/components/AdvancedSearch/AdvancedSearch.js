@@ -11,6 +11,8 @@ import {
   Box,
 } from "@mui/material";
 
+import { ToggleButton, ToggleButtonGroup } from "@mui/material";
+
 function formatBigNumber(marketCap) {
   if (marketCap >= 1000000000) {
     return (marketCap / 1000000000).toFixed(1) + "B";
@@ -188,7 +190,80 @@ const stockData = [
   // more data objects here
 ];
 
-const StockTable = () => {
+const indexFunds = [
+  {
+    fundName: "Vanguard 500 Index Fund",
+    symbol: "VFIAX",
+    assets: 786.2,
+    expenseRatio: 0.04,
+    yield: 1.27,
+  },
+  {
+    fundName: "Invesco QQQ Trust",
+    symbol: "QQQ",
+    assets: 171.8,
+    expenseRatio: 0.2,
+    yield: 0.4,
+  },
+  {
+    fundName: "iShares Russell 2000 ETF",
+    symbol: "IWM",
+    assets: 73.2,
+    expenseRatio: 0.19,
+    yield: 0.9,
+  },
+  {
+    fundName: "iShares MSCI EAFE ETF",
+    symbol: "EFA",
+    assets: 83.1,
+    expenseRatio: 0.32,
+    yield: 2.4,
+  },
+  {
+    fundName: "iShares MSCI Emerging Markets ETF",
+    symbol: "EEM",
+    assets: 50.5,
+    expenseRatio: 0.67,
+    yield: 1.4,
+  },
+  {
+    fundName: "SPDR Dow Jones Industrial Average ETF Trust",
+    symbol: "DIA",
+    assets: 34.8,
+    expenseRatio: 0.16,
+    yield: 1.9,
+  },
+  {
+    fundName: "Vanguard Total Stock Market ETF",
+    symbol: "VTI",
+    assets: 233.3,
+    expenseRatio: 0.03,
+    yield: 1.4,
+  },
+  {
+    fundName: "iShares Core S&P Mid-Cap ETF",
+    symbol: "IJH",
+    assets: 78.4,
+    expenseRatio: 0.05,
+    yield: 1.2,
+  },
+  {
+    fundName: "iShares MSCI World ETF",
+    symbol: "URTH",
+    assets: 6.8,
+    expenseRatio: 0.24,
+    yield: 1.5,
+  },
+  {
+    fundName: "Vanguard FTSE Developed Markets ETF",
+    symbol: "VEA",
+    assets: 110.9,
+    expenseRatio: 0.05,
+    yield: 2.7,
+  },
+];
+
+const StockTable = (props) => {
   const [assetValue, setAssetValue] = useState("");
   const [assetAbove, setAssetAbove] = useState(false);
   const [liabilityValue, setLiabilityValue] = useState("");
@@ -197,6 +272,11 @@ const StockTable = () => {
   const [profitAbove, setProfitAbove] = useState(false);
   const [epsValue, setEpsValue] = useState("");
   const [epsAbove, setEpsAbove] = useState(false);
+  const [selectedButtons, setSelectedButtons] = useState(["Stocks"]);
+
+  const handleSelectedButtons = (event, newSelectedButtons) => {
+    setSelectedButtons([newSelectedButtons[newSelectedButtons.length - 1]]);
+  };
 
   const handleAssetValueChange = (event) => {
     setAssetValue(event.target.value);
@@ -273,89 +353,148 @@ const StockTable = () => {
 
   return (
     <>
-      <Box border={1} padding={2} marginBottom={2}>
-        <TextField
-          label="Assets"
-          type="number"
-          value={assetValue}
-          onChange={handleAssetValueChange}
-          style={{ marginRight: "16px" }}
-        />
-        <Switch
-          checked={assetAbove}
-          onChange={handleAssetAboveChange}
-          inputProps={{ "aria-label": "filter assets above" }}
-        />
-        <span>{assetAbove ? "Above" : "Below"} threshold</span>
+      <h1>Advanced Search</h1>
+      <ToggleButtonGroup
+        value={selectedButtons}
+        onChange={handleSelectedButtons}
+        aria-label="button group"
+      >
+        <ToggleButton value="Stocks" aria-label="stocks button">
+          Stocks
+        </ToggleButton>
+        <ToggleButton value="Index Funds" aria-label="index funds button">
+          Index Funds
+        </ToggleButton>
+        <ToggleButton value="Bonds" aria-label="bonds button">
+          Bonds
+        </ToggleButton>
+      </ToggleButtonGroup>
+      <Box display="flex">
+        <Box
+          border={1}
+          padding={2}
+          marginBottom={2}
+          width="20em"
+          margin="0em"
+          marginRight="0.5em"
+        >
+          <TextField
+            label="Assets"
+            type="number"
+            value={assetValue}
+            onChange={handleAssetValueChange}
+            style={{ marginRight: "16px" }}
+          />
+          <Switch
+            checked={assetAbove}
+            onChange={handleAssetAboveChange}
+            inputProps={{ "aria-label": "filter assets above" }}
+          />
+          <span>{assetAbove ? "Above" : "Below"}</span>
+        </Box>
+        <Box
+          border={1}
+          padding={2}
+          marginBottom={2}
+          width="20em"
+          margin="0em"
+          marginRight="0.5em"
+        >
+          <TextField
+            label="Liabilities"
+            type="number"
+            value={liabilityValue}
+            onChange={handleLiabilityValueChange}
+            style={{ marginRight: "16px" }}
+          />
+          <Switch
+            checked={liabilityAbove}
+            onChange={handleLiabilityAboveChange}
+            inputProps={{ "aria-label": "filter liabilities above" }}
+          />
+          <span>{liabilityAbove ? "Above" : "Below"}</span>
+        </Box>
+        <Box
+          border={1}
+          padding={2}
+          marginBottom={2}
+          width="20em"
+          margin="0em"
+          marginRight="0.4em"
+        >
+          <TextField
+            label="Gross Profit"
+            type="number"
+            value={profitValue}
+            onChange={handleProfitValueChange}
+            style={{ marginRight: "16px" }}
+          />
+          <Switch
+            checked={profitAbove}
+            onChange={handleProfitAboveChange}
+            inputProps={{ "aria-label": "filter gross profit above" }}
+          />
+          <span>{profitAbove ? "Above" : "Below"}</span>
+        </Box>
+        <Box border={1} padding={2} marginBottom={2} width="20em" margin="0em">
+          <TextField
+            label="Earnings Per Share"
+            type="number"
+            value={epsValue}
+            onChange={handleEpsValueChange}
+            style={{ marginRight: "16px" }}
+          />
+          <Switch
+            checked={epsAbove}
+            onChange={handleEpsAboveChange}
+            inputProps={{ "aria-label": "filter earnings per share above" }}
+          />
+          <span>{epsAbove ? "Above" : "Below"}</span>
+        </Box>
       </Box>
-      <Box border={1} padding={2} marginBottom={2}>
-        <TextField
-          label="Liabilities"
-          type="number"
-          value={liabilityValue}
-          onChange={handleLiabilityValueChange}
-          style={{ marginRight: "16px" }}
-        />
-        <Switch
-          checked={liabilityAbove}
-          onChange={handleLiabilityAboveChange}
-          inputProps={{ "aria-label": "filter liabilities above" }}
-        />
-        <span>{liabilityAbove ? "Above" : "Below"} threshold</span>
-      </Box>
-      <Box border={1} padding={2} marginBottom={2}>
-        <TextField
-          label="Gross Profit"
-          type="number"
-          value={profitValue}
-          onChange={handleProfitValueChange}
-          style={{ marginRight: "16px" }}
-        />
-        <Switch
-          checked={profitAbove}
-          onChange={handleProfitAboveChange}
-          inputProps={{ "aria-label": "filter gross profit above" }}
-        />
-        <span>{profitAbove ? "Above" : "Below"} threshold</span>
-      </Box>
-      <Box border={1} padding={2} marginBottom={2}>
-        <TextField
-          label="Earnings Per Share"
-          type="number"
-          value={epsValue}
-          onChange={handleEpsValueChange}
-          style={{ marginRight: "16px" }}
-        />
-        <Switch
-          checked={epsAbove}
-          onChange={handleEpsAboveChange}
-          inputProps={{ "aria-label": "filter earnings per share above" }}
-        />
-        <span>{epsAbove ? "Above" : "Below"} threshold</span>
-      </Box>
+
       <TableContainer>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Company Name</TableCell>
-              <TableCell>Symbol</TableCell>
-              <TableCell>Assets</TableCell>
-              <TableCell>Liabilities</TableCell>
-              <TableCell>Gross Profit</TableCell>
-              <TableCell>Earnings Per Share</TableCell>
+              <TableCell style={{ fontWeight: "800" }}>Company Name</TableCell>
+              <TableCell style={{ fontWeight: "800" }}>Symbol</TableCell>
+              <TableCell style={{ fontWeight: "800" }}>Assets</TableCell>
+              <TableCell style={{ fontWeight: "800" }}>Liabilities</TableCell>
+              <TableCell style={{ fontWeight: "800" }}>Gross Profit</TableCell>
+              {selectedButtons.includes("Stocks") && (
+                <TableCell style={{ fontWeight: "800" }}>
+                  Earnings Per Share
+                </TableCell>
+              )}
             </TableRow>
           </TableHead>
           <TableBody>
-            {filteredData.map((item) => (
-              <TableRow key={item.symbol}>
-                <TableCell>{item.companyName}</TableCell>
-                <TableCell>{item.symbol}</TableCell>
-                <TableCell>{formatBigNumber(item.assets)}</TableCell>
-                <TableCell>{formatBigNumber(item.liabilities)}</TableCell>
-                <TableCell>{formatBigNumber(item.grossProfit)}</TableCell>
-                <TableCell>{item.earningsPerShare}</TableCell>
-              </TableRow>
-            ))}
+            {selectedButtons.includes("Stocks") &&
+              filteredData.map((item) => (
+                <TableRow
+                  key={item.symbol}
+                  style={{ cursor: "pointer" }}
+                  onClick={() => props.onSearchTableRowClicked(item.symbol)}
+                >
+                  <TableCell>{item.companyName}</TableCell>
+                  <TableCell>{item.symbol}</TableCell>
+                  <TableCell>{formatBigNumber(item.assets)}</TableCell>
+                  <TableCell>{formatBigNumber(item.liabilities)}</TableCell>
+                  <TableCell>{formatBigNumber(item.grossProfit)}</TableCell>
+                  <TableCell>{item.earningsPerShare}</TableCell>
+                </TableRow>
+              ))}
+            {selectedButtons.includes("Index Funds") &&
+              indexFunds.map((item) => (
+                <TableRow key={item.symbol} style={{ cursor: "pointer" }}>
+                  <TableCell>{item.fundName}</TableCell>
+                  <TableCell>{item.symbol}</TableCell>
+                  <TableCell>{formatBigNumber(item.assets)}</TableCell>
+                  <TableCell>{formatBigNumber(item.expenseRatio)}</TableCell>
+                  <TableCell>{formatBigNumber(item.yield)}</TableCell>
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
       </TableContainer>

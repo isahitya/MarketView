@@ -59,7 +59,7 @@ export default function LoginView(props) {
               label="Email Address"
               name="email"
               //autoComplete="email"
-              value="john.doe@gmail.com"
+              //value="john.doe@gmail.com"
               autoFocus
             />
             <TextField
@@ -70,7 +70,7 @@ export default function LoginView(props) {
               label="Password"
               type="password"
               id="password"
-              value="password"
+              //value="password"
               //autoComplete="current-password"
             />
             {/* <FormControlLabel

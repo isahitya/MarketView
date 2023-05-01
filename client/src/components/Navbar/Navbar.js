@@ -6,6 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import HomeIcon from "@mui/icons-material/Home";
 import Autocomplete from "@mui/material/Autocomplete";
 import InputAdornment from "@mui/material/InputAdornment";
+import TuneIcon from "@mui/icons-material/Tune";
 
 export default function NavBar(props) {
   const data = [
@@ -37,12 +38,14 @@ export default function NavBar(props) {
           color="inherit"
           aria-label="home"
           onClick={props.onHomeButtonClick}
+          style={{ paddingRight: "1em" }}
         >
           <HomeIcon />
         </IconButton>
-        <Button onClick={props.onAdvancedSearchButtonClick}>
+
+        {/* <Button onClick={props.onAdvancedSearchButtonClick}>
           Advanced Search
-        </Button>
+        </Button> */}
         <Autocomplete
           freeSolo
           //className={classes.textField}
@@ -68,6 +71,18 @@ export default function NavBar(props) {
             />
           )}
         />
+        <IconButton
+          edge="start"
+          color="inherit"
+          aria-label="home"
+          onClick={props.onAdvancedSearchButtonClick}
+          style={{ paddingLeft: "1em" }}
+        >
+          <TuneIcon />
+        </IconButton>
+        <h1 style={{ paddingLeft: "28em", paddingRight: "2em", margin: "0em" }}>
+          MarketView
+        </h1>
       </Toolbar>
     </AppBar>
   );
